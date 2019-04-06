@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <meta name="description" content="">
+  <meta name="author" content="">
+</head>
+
+<body>
+  <p id='status'>loading...</p>
+  <input type='file' id='imgfile' accept='image/gif, image/jpeg, image/png' />
+  <div>
+    <img id='src'></img>
+    <canvas id='dst'></canvas>
+  </div>
+  <script src="opencv.js" async onload="done()"></script>
+  <script>
+    let srcEle = document.getElementById('src'),
+      input = document.getElementById('imgfile');
+
+    input.addEventListener("change", (e) => {
+      srcEle.src = URL.createObjectURL(e.target.files[0]);
+    }, false);
+    srcEle.onload = function () {
+      //TODO:
+      let mat = cv.imread(srcEle);
+      cv.cvtColor(mat, mat, cv.COLOR_RGBA2GRAY);
+      cv.imshow('dst', mat);
+      mat.delete();
+      //TODO:
+    }
+
+    function done() {
+      document.getElementById('status').innerHTML = 'loaded'
+    }
+  </script>
+</body>
+
+</html>
+<!-- Copyright (c) 2019 YA-androidapp(https://github.com/YA-androidapp) All rights reserved. -->
