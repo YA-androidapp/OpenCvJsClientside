@@ -117,6 +117,18 @@ detect.addEventListener('click', () => {
         cv.rectangle(src, point1, point2, [255, 0, 0, 255]);
         roiGray.delete();
         roiSrc.delete();
+
+        // Canvasを追加してトリミングした画像を表示
+        canvasInputContext = document.getElementById('canvasInput').getContext('2d');
+        image_size = 100;
+        mem_canvas = document.createElement('canvas');
+        mem_canvas.width = image_size;
+        mem_canvas.height = image_size;
+        mem_canvas.id = 'canvas' + String(i)
+        var image = canvasInputContext.getImageData(faces.get(i).x, faces.get(i).y, faces.get(i).width, faces.get(i).height);
+        mem_canvas.getContext('2d').putImageData(image, 0, 0, 0, 0, image_size, image_size);
+        var data = mem_canvas.toDataURL('image/png');
+        document.getElementById('result').innerHTML += '<img id="' + mem_canvas.id + '" src="' + data + '">';
     }
     cv.imshow('canvasOutput', src);
     src.delete();
