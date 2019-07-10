@@ -1,3 +1,5 @@
+// Copyright (c) 2019 YA-androidapp(https://github.com/YA-androidapp) All rights reserved.
+
 let faceCascadeFile = 'haarcascade_frontalface_default.xml';
 // let faceCascadeFile = 'lbpcascade_animeface.xml';
 
